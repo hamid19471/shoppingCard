@@ -6,31 +6,70 @@ const ProductList = () => {
             id: 1,
             title: "MacBook Air 2021",
             price: "899.00 $",
+            quantity: 1,
         },
         {
             id: 2,
             title: "MacBook Pro 2021",
             price: "1100.00 $",
+            quantity: 1,
         },
         {
             id: 3,
-            title: "iMac 2021",
+            title: "MacBook Pro 2022",
             price: "2100.00 $",
+            quantity: 1,
         },
     ]);
 
     const onDeleteHandler = (id) => {
         setDate(data.filter((item) => item.id !== id));
     };
+    const increamentHandler = (id) => {
+        setDate((prev) =>
+            prev.map((item) =>
+                item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+            )
+        );
+    };
+
+    const chandeProductNameHandler = (event, id) => {
+        setDate(
+            data.map((item) => {
+                if (item.id === id) {
+                    return { ...item, title: event.target.value };
+                }
+                return item;
+            })
+        );
+    };
+
+    const decrementHandler = (id) => {
+        const findItem = data.find((item) => item.id === id);
+        if (findItem.quantity > 1) {
+            setDate((prev) =>
+                prev.map((item) =>
+                    item.id === id
+                        ? { ...item, quantity: item.quantity - 1 }
+                        : item
+                )
+            );
+        } else {
+            setDate((prev) => prev.filter((item) => item.id !== id));
+        }
+    };
     return (
         <div>
             <div>
                 {data.map((item) => (
                     <Products
-                        key={item.id}
-                        price={item.price}
-                        name={item.title}
+                        product={item}
                         onDelete={() => onDeleteHandler(item.id)}
+                        increamentCounter={() => increamentHandler(item.id)}
+                        decrementCouter={() => decrementHandler(item.id)}
+                        changeInputHandler={(event) =>
+                            chandeProductNameHandler(event, item.id)
+                        }
                     />
                 ))}
             </div>

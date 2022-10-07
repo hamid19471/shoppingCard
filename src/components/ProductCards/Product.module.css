@@ -16,3 +16,36 @@
 .product__price{
     color: rgb(255, 71, 71);
 }
+
+.product__quantity{
+    background-color: #6366f1;
+    color: #fff;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+}
+
+.product__button{
+    outline: none;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    color: #212121;
+    border-radius:5px;
+    border:1px solid lightgray;
+    cursor: pointer
+}
+
+.product__increament{
+    background-color:#2563eb;
+    color:#fff;
+    
+}
+
+.product__decreament{
+    background-color:#dc2626;
+    color:#fff;
+}
