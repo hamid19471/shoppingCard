@@ -34,14 +34,16 @@ const ProductList = () => {
     };
 
     const chandeProductNameHandler = (event, id) => {
-        setDate(
-            data.map((item) => {
-                if (item.id === id) {
-                    return { ...item, title: event.target.value };
-                }
-                return item;
-            })
-        );
+        const findItem = data.find((item) => item.id === id);
+        if (findItem.id === id) {
+            setDate((prev) =>
+                prev.map((item) =>
+                    item.id === id
+                        ? { ...item, title: event.target.value }
+                        : item
+                )
+            );
+        }
     };
 
     const decrementHandler = (id) => {
