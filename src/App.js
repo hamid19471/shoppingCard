@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import HookCounter from "./components/Hooks/HookCounter";
 import Products from "./components/Products/Products";
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
     ];
 
     return (
-        <div>
+        <div className="container">
             <div>
                 {data.map((item) => (
                     <Products
@@ -33,7 +32,6 @@ function App() {
             <div>
                 <button>Change Data</button>
             </div>
-            <HookCounter />
         </div>
     );
 }
