@@ -1,6 +1,18 @@
 .product{
     border: 1px solid lightgray;
     border-radius: 10px;
-    margin: 10px auto;
-    padding: 10px;
+    margin: 20px auto;
+    padding: 20px;
+    width: 50rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product__title{
+    font-weight: 500;
+}
+
+.product__price{
+    color: rgb(255, 71, 71);
 }

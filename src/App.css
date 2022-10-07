@@ -1,8 +1,15 @@
 .container{
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     background-color:#fff;
     height: 90vh;
+}
+
+.app__heading{
+    text-align: center
+}
+
+.app__heading p{
+    color:rgb(100, 100, 100)
 }

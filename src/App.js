@@ -5,9 +5,12 @@ import ProductList from "./components/ProducstList/ProductList";
 function App() {
     return (
         <div className="container">
+            <div className="app__heading">
+                <h1>Shopping Application</h1>
+                <p>WELCOME TO FIRST APP CREATED BY REACT</p>
+            </div>
             <div>
                 <ProductList />
-                <button>Change Data</button>
             </div>
         </div>
     );
