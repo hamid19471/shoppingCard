@@ -25,7 +25,11 @@ const Products = ({
                 value={product.title}
             />
             <button
-                className={`${styled.product__button} ${styled.product__decreament}`}
+                className={`${styled.product__button} ${
+                    product.quantity > 1
+                        ? styled.product__quantity_checking
+                        : styled.product__decreament
+                }`}
                 onClick={decrementCouter}>
                 {product.quantity > 1 ? "-" : <BiTrash />}
             </button>
