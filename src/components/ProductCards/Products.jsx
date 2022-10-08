@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "./Product.module.css";
+import { BiTrash } from "react-icons/bi";
 //Module for import CSS styles is bettrer and requiment for import css and style in compont
 //when you use this method, all of styles only use in selected component
 const Products = ({
@@ -26,7 +27,7 @@ const Products = ({
             <button
                 className={`${styled.product__button} ${styled.product__decreament}`}
                 onClick={decrementCouter}>
-                -
+                {product.quantity > 1 ? "-" : <BiTrash />}
             </button>
             <span className={styled.product__quantity}>{product.quantity}</span>
             <button
@@ -35,7 +36,7 @@ const Products = ({
                 +
             </button>
             <button className={styled.product__button} onClick={onDelete}>
-                Delete
+                Delete <BiTrash />
             </button>
         </div>
     );
