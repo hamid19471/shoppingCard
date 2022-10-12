@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./Product.module.css";
 import { BiTrash } from "react-icons/bi";
 //Module for import CSS styles is bettrer and requiment for import css and style in compont
@@ -10,6 +10,12 @@ const Products = ({
     changeInputHandler,
     decrementCouter,
 }) => {
+    useEffect(() => {
+        console.log("Product.js useEffects");
+        return () => {
+            console.log("product CWUM");
+        };
+    }, []);
     return (
         <div className={styled.product}>
             <h3 className={styled.product__title}>{product.title}</h3>

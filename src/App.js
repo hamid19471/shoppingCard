@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
+// import CounterFunction from "./components/CounterFunction/CounterFunction";
+import ClickCounter from "./components/MyCounter/ClickCounter";
+import HoverCount from "./components/MyCounter/HoverCounter";
 import NavBar from "./components/NavBar/NavBar";
 import ProductList from "./components/ProducstList/ProductList";
 
 function App() {
+    // const [show, setShow] = useState(false);
     const [data, setDate] = useState([
         {
             id: 1,
@@ -87,6 +91,12 @@ function App() {
                     changeInputHandler={chandeProductNameHandler}
                 />
             </div>
+            {/* <button onClick={() => setShow(!show)}>
+                {show ? "SHOW" : "HIDE"}
+            </button>
+            {!show && <CounterFunction />} */}
+            {/* <ClickCounter />
+            <HoverCount /> */}
         </div>
     );
 }

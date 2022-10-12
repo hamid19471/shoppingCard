@@ -17,11 +17,14 @@ const NavBar = ({ totalProducts, totalPrice }) => {
                 </ul>
             </div>
             <div className="navbar__icons">
-                <BiCartAlt onMouseDown={clickHandler} />
+                <BiCartAlt
+                    onMouseDown={clickHandler}
+                    className="navbar__cart"
+                />
                 <span className={!click ? "navbar__badget" : "price__badget"}>
                     {!click ? totalProducts : "Price is :" + totalPrice + " $"}
                 </span>
-                <BiUser />
+                <BiUser className="navbar__user" />
             </div>
         </header>
     );
