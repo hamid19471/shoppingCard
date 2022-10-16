@@ -8,12 +8,7 @@ import {
 
 const ProductList = () => {
     const product = useProducts();
-    const {
-        increamentHandler,
-        decrementHandler,
-        chandeProductNameHandler,
-        onDeleteHandler,
-    } = useProductsActions();
+    const dispatch = useProductsActions();
     return (
         <div>
             <div className="app__heading">
@@ -25,11 +20,21 @@ const ProductList = () => {
                     {product.map((item) => (
                         <Products
                             product={item}
-                            onDelete={() => onDeleteHandler(item.id)}
-                            increamentCounter={() => increamentHandler(item.id)}
-                            decrementCouter={() => decrementHandler(item.id)}
+                            onDelete={() =>
+                                dispatch({ type: "delete", id: item.id })
+                            }
+                            increamentCounter={() =>
+                                dispatch({ type: "increment", id: item.id })
+                            }
+                            decrementCouter={() =>
+                                dispatch({ type: "decrement", id: item.id })
+                            }
                             changeInputHandler={(event) =>
-                                chandeProductNameHandler(event, item.id)
+                                dispatch({
+                                    type: "changeInput",
+                                    id: item.id,
+                                    event: event,
+                                })
                             }
                         />
                     ))}

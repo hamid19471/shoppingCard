@@ -1,14 +1,57 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import { ProductsData } from "../Db/Db";
 const ProductsContext = React.createContext();
 const ProductsContexDispacher = React.createContext();
-
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "delete":
+            const deleteResult = state.filter((item) => item.id !== action.id);
+            return deleteResult;
+        case "increment":
+            const incrementResult = state.map((item) =>
+                item.id === action.id
+                    ? { ...item, quantity: item.quantity++ }
+                    : item
+            );
+            return incrementResult;
+        case "decrement":
+            const findItem = state.find((item) => item.id === action.id);
+            if (findItem.quantity > 1) {
+                const decrementResult = state.map((item) =>
+                    item.id === action.id
+                        ? { ...item, quantity: item.quantity-- }
+                        : item
+                );
+                return decrementResult;
+            } else {
+                const decrementResultDelete = state.filter(
+                    (item) => item.id !== action.id
+                );
+                return decrementResultDelete;
+            }
+        case "changeInput":
+            const findChageInputId = state.find(
+                (item) => item.id === action.id
+            );
+            if (findChageInputId.id === action.id) {
+                const changeInputResult = state.map((item) =>
+                    item.id === action.id
+                        ? { ...item, title: action.event.target.value }
+                        : item
+                );
+                return changeInputResult;
+            }
+            break;
+        default:
+            return state;
+    }
+};
 const ProductsProvider = ({ children }) => {
-    const [product, setProduct] = useState(ProductsData);
+    const [product, dispatch] = useReducer(reducer, ProductsData);
     return (
         <>
             <ProductsContext.Provider value={product}>
-                <ProductsContexDispacher.Provider value={setProduct}>
+                <ProductsContexDispacher.Provider value={dispatch}>
                     {children}
                 </ProductsContexDispacher.Provider>
             </ProductsContext.Provider>
@@ -20,61 +63,5 @@ export default ProductsProvider;
 
 export const useProducts = () => useContext(ProductsContext);
 export const useProductsActions = () => {
-    const setProduct = useContext(ProductsContexDispacher);
-    const product = useContext(ProductsContext);
-    const onDeleteHandler = (id) => {
-        setProduct(product.filter((item) => item.id !== id));
-    };
-    const increamentHandler = (id) => {
-        setProduct((prev) =>
-            prev.map((item) =>
-                item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-            )
-        );
-    };
-
-    const chandeProductNameHandler = (event, id) => {
-        const findItem = product.find((item) => item.id === id);
-        if (findItem.id === id) {
-            setProduct((prev) =>
-                prev.map((item) =>
-                    item.id === id
-                        ? { ...item, title: event.target.value }
-                        : item
-                )
-            );
-        }
-    };
-
-    const decrementHandler = (id) => {
-        const findItem = product.find((item) => item.id === id);
-        if (findItem.quantity > 1) {
-            setProduct((prev) =>
-                prev.map((item) =>
-                    item.id === id
-                        ? { ...item, quantity: item.quantity - 1 }
-                        : item
-                )
-            );
-        } else {
-            setProduct((prev) => prev.filter((item) => item.id !== id));
-        }
-    };
-    const totalPrice = product.reduce(
-        (prev, items) => (prev + items.price) * items.quantity,
-        0
-    );
-    const totalProducts = product.reduce(
-        (prev, items) => prev + items.quantity,
-        0
-    );
-
-    return {
-        decrementHandler,
-        increamentHandler,
-        chandeProductNameHandler,
-        onDeleteHandler,
-        totalPrice,
-        totalProducts,
-    };
+    return useContext(ProductsContexDispacher);
 };
