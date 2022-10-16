@@ -1,25 +1,35 @@
 import React from "react";
 import Products from "../ProductCards/Products";
+import "./productList.style.css";
+import {
+    useProducts,
+    useProductsActions,
+} from "../ProductCards/ProductsProvider";
 
-const ProductList = ({
-    product,
-    onDelete,
-    increamentCounter,
-    decreationCounter,
-    changeInputHandler,
-}) => {
+const ProductList = () => {
+    const product = useProducts();
+    const {
+        increamentHandler,
+        decrementHandler,
+        chandeProductNameHandler,
+        onDeleteHandler,
+    } = useProductsActions();
     return (
         <div>
+            <div className="app__heading">
+                <h1>Shopping Application</h1>
+                <p>WELCOME TO FIRST APP CREATED BY REACT</p>
+            </div>
             {product.length ? (
                 <div>
                     {product.map((item) => (
                         <Products
                             product={item}
-                            onDelete={() => onDelete(item.id)}
-                            increamentCounter={() => increamentCounter(item.id)}
-                            decrementCouter={() => decreationCounter(item.id)}
+                            onDelete={() => onDeleteHandler(item.id)}
+                            increamentCounter={() => increamentHandler(item.id)}
+                            decrementCouter={() => decrementHandler(item.id)}
                             changeInputHandler={(event) =>
-                                changeInputHandler(event, item.id)
+                                chandeProductNameHandler(event, item.id)
                             }
                         />
                     ))}

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { BiCartAlt, BiUser } from "react-icons/bi";
+import { useProductsActions } from "../ProductCards/ProductsProvider";
 import "./NavBar.css";
-const NavBar = ({ totalProducts, totalPrice }) => {
+const NavBar = () => {
     const [click, setClick] = useState(false);
     const clickHandler = () => setClick(!click);
+    const { totalProducts, totalPrice } = useProductsActions();
     return (
         <header className="navbar">
             <div className="navbar__logo">APP-STORE.</div>
