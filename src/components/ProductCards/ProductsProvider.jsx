@@ -2,19 +2,27 @@ import React, { useContext, useReducer } from "react";
 import { ProductsData } from "../Db/Db";
 const ProductsContext = React.createContext();
 const ProductsContexDispacher = React.createContext();
+
+const ACTIONS = {
+    DELETE: "delete",
+    INCREMENT: "increment",
+    DECREMENT: "decrement",
+    CHANGEINPUT: "changeInput",
+};
+
 const reducer = (state, action) => {
     switch (action.type) {
-        case "delete":
+        case ACTIONS.DELETE:
             const deleteResult = state.filter((item) => item.id !== action.id);
             return deleteResult;
-        case "increment":
+        case ACTIONS.INCREMENT:
             const incrementResult = state.map((item) =>
                 item.id === action.id
                     ? { ...item, quantity: item.quantity++ }
                     : item
             );
             return incrementResult;
-        case "decrement":
+        case ACTIONS.DECREMENT:
             const findItem = state.find((item) => item.id === action.id);
             if (findItem.quantity > 1) {
                 const decrementResult = state.map((item) =>
@@ -29,7 +37,7 @@ const reducer = (state, action) => {
                 );
                 return decrementResultDelete;
             }
-        case "changeInput":
+        case ACTIONS.CHANGEINPUT:
             const findChageInputId = state.find(
                 (item) => item.id === action.id
             );
