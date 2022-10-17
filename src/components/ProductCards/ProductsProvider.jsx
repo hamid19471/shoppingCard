@@ -70,6 +70,4 @@ const ProductsProvider = ({ children }) => {
 export default ProductsProvider;
 
 export const useProducts = () => useContext(ProductsContext);
-export const useProductsActions = () => {
-    return useContext(ProductsContexDispacher);
-};
+export const useProductsActions = () => useContext(ProductsContexDispacher);
