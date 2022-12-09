@@ -1,0 +1,6 @@
+Create a simple fake store only with useContext and useReducere React Hooks 
+in this simple app you can Increase and Decrease product in existing list
+when decrease count come to Zero, product will remove and use can delete product anytime you want with delete button 
+there is 2 filters system, by price and size 
+when you filter size, after filter by price size filter active
+there is a bascket icon with badge and when click on it, show total price 
